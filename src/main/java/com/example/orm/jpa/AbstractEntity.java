@@ -1,21 +1,24 @@
-package com.example.copsboot.orm.jpa;
-import com.example.util.ArtifactForFramework;
-import jakarta.persistence.MappedSuperclass;
-import java.io.Serializable;
-import java.util.Objects;
+package com.example.orm.jpa;
 
+import com.example.util.ArtifactForFramework;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.MappedSuperclass;
+import java.util.Objects;
 import static com.google.common.base.MoreObjects.toStringHelper;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @MappedSuperclass
-public abstract class AbstractEntityId<T extends  Serializable> implements  Serializable, EntityId<T> {
+public abstract class AbstractEntity<T extends EntityId> implements Entity<T>{
+
+    @EmbeddedId
     private T id;
 
     @ArtifactForFramework
-    protected AbstractEntityId() {
+    protected AbstractEntity() {
     }
 
-    protected AbstractEntityId(T id){
-        this.id = Objects.requireNonNull(id);
+    public  AbstractEntity(T id) {
+        this.id = checkNotNull(id);
     }
 
     @Override
@@ -24,18 +27,12 @@ public abstract class AbstractEntityId<T extends  Serializable> implements  Seri
     }
 
     @Override
-    public String asString() {
-        return id.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object obj) {
         boolean result = false;
-
-        if(this == o) {
+        if(this == obj) {
             result = true;
-        } else if (o instanceof AbstractEntityId) {
-            AbstractEntityId other = (AbstractEntityId) o;
+        } else if (obj instanceof AbstractEntity) {
+            AbstractEntity other = (AbstractEntity)obj;
             result = Objects.equals(id, other.id);
         }
         return result;
@@ -52,6 +49,4 @@ public abstract class AbstractEntityId<T extends  Serializable> implements  Seri
                 .add("id", id)
                 .toString();
     }
-
-
 }
