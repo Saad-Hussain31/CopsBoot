@@ -1,7 +1,4 @@
-package com.example.copsboot;
-import com.example.copsboot.user.User;
-import com.example.copsboot.user.UserRepository;
-import com.example.copsboot.user.UserRole;
+package com.example.copsboot.user;
 import com.example.orm.jpa.InMemoryUniqueIdGenerator;
 import com.example.orm.jpa.UniqueIdGenerator;
 import org.junit.jupiter.api.Test;

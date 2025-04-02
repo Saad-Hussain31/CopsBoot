@@ -1,4 +1,4 @@
-package com.example.copsboot;
+package com.example.copsboot.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
